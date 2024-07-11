@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>前端路由</title>
+  </head>
+  <body>
+    <ul>
+      <li><a href="#/home">首页</a></li>
+      <li><a href="#/about">关于</a></li>
+    </ul>
+
+    <div id="routeView">
+      <!-- 放一个代码片段 点击首页首页代码片段生效，反之关于生效-->
+    </div>
+  </body>
+  <script>
+    const routes = [
+      {
+        path: "#/home",
+        component: "首页内容",
+      },
+      {
+        path: "#/about",
+        component: "关于页面内容",
+      },
+    ];
+    const routeView = document.getElementById("routeView");
+    window.addEventListener("DOMContentLoaded", onHashChange); // 与vue的声明周期一个道理，dom一加载完毕就触发
+    window.addEventListener("hashchange", onHashChange);
+
+    function onHashChange() {
+      console.log(window.location,); // url详情，里面就有个hash值  liveserver可以帮你把html跑成服务器
+      routes.forEach((item, index) => {
+        if (item.path === location.hash) {
+          routeView.innerHTML = item.component;
+          console.log(item.component)
+        }
+      });
+    }
+  </script>
+</html>
